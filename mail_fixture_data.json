@@ -1,0 +1,47 @@
+[
+{
+  "model": "mail.client",
+  "pk": 1,
+  "fields": {
+    "email": "PetrovPP@test.test",
+    "full_name": "Петров Петр Петрович",
+    "comment": null
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 2,
+  "fields": {
+    "email": "Ivanov2000@test.test",
+    "full_name": "Иванов Иван",
+    "comment": "Отчества нет"
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 3,
+  "fields": {
+    "email": "terminator3000@test.test",
+    "full_name": "Шварцнеггер Арнольд",
+    "comment": "Тот самый"
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 4,
+  "fields": {
+    "email": "krasivaya_pochta@test.test",
+    "full_name": "Красивое ФИО",
+    "comment": null
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 5,
+  "fields": {
+    "email": "test@test.test",
+    "full_name": "Тест Тестов",
+    "comment": "тест"
+  }
+}
+]
