@@ -1,0 +1,25 @@
+{% extends 'mail/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <a class="p-2 nav-link active" href="{% url 'mail:mail_create' %}">Создать письмо</a>
+        <div class="card  box-shadow">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th class="w-35">Заголовок</th>
+                        <th>Содержание письма</th>
+                    </tr>
+                    {% for object in object_list %}
+                    <tr>
+                        <td scope="row">{{ object.head }}</td>
+                        <td>{{ object.body }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

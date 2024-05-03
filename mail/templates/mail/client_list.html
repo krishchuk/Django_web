@@ -3,19 +3,22 @@
 <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-        <div class="card  box-shadow">
+        <a class="p-2 nav-link active" href="{% url 'mail:client_create' %}">Добавить клиента</a>
+        <div class="card box-shadow">
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table">
                     <tr>
-                        <th class="w-25">Почта</th>
-                        <th>Ф.И.О.</th>
-                        <th>Комментарий</th>
+                        <th class="w-30">Почта</th>
+                        <th class="w-30">Ф.И.О.</th>
+                        <th class="w-30">Комментарий</th>
+                        <th></th>
                     </tr>
                     {% for object in object_list %}
                     <tr>
                         <td scope="row">{{ object.email }}</td>
                         <td>{{ object.full_name }}</td>
                         <td>{% if object.comment %} {{ object.comment }} {% endif %}</td>
+                        <td><a href="{% url 'mail:client_detail' object.pk %}" type="button" class="nav-link">Подробнее</a></td>
                     </tr>
                     {% endfor %}
                 </table>

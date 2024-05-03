@@ -15,6 +15,13 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.username} {self.email}"
 
+    def block_user(self):
+        self.is_active = False
+        self.save()
+
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
+        permissions = [
+            ("disable_user", "Can disable user"),
+        ]

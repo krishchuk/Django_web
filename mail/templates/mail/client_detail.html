@@ -1,0 +1,25 @@
+{% extends 'mail/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Почта:</td>
+                        <td>{{ object.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ф.И.О.:</td>
+                        <td>{{ object.full_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Комментарий:</td>
+                        <td>{% if object.comment %} {{ object.comment }} {% endif %}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
