@@ -13,7 +13,7 @@ class HomeView(TemplateView):
         }
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     extra_context = {
         'title': "Список клиентов"
@@ -90,7 +90,7 @@ class EmailSettingsDeleteView(LoginRequiredMixin, DeleteView):
     }
 
 
-class EmailSettingsListView(ListView):
+class EmailSettingsListView(LoginRequiredMixin, ListView):
     model = EmailSettings
     extra_context = {
         'title': "Список рассылок"
@@ -123,7 +123,7 @@ class EmailMessageDeleteView(LoginRequiredMixin, DeleteView):
     }
 
 
-class EmailMessageListView(ListView):
+class EmailMessageListView(LoginRequiredMixin, ListView):
     model = EmailMessage
     extra_context = {
         'title': "Список писем"

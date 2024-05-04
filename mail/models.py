@@ -7,13 +7,13 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class Client(models.Model):
-    email = models.EmailField(unique=True, verbose_name='почта')
+    email = models.EmailField(verbose_name='почта')
     full_name = models.CharField(max_length=35, verbose_name='Ф.И.О.', **NULLABLE)
     comment = models.CharField(max_length=250, verbose_name='комментарий', **NULLABLE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None, verbose_name='владелец', **NULLABLE)
 
     def __str__(self):
-        return f'{self.email} - {self.full_name}'
+        return f'{self.email}'
 
     class Meta:
         verbose_name = 'клиент'
