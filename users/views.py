@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, TemplateView, FormView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView, DeleteView
 
 from users.forms import UserRegisterForm, ProfileChangeForm, CustomAuthenticationForm
 from users.models import User
@@ -123,3 +123,14 @@ class PasswordChangeView(FormView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy('mail:home')
+    extra_context = {
+        'title': "Удалить аккаунт"
+    }
+
+    def get_object(self, queryset=None):
+        return self.request.user

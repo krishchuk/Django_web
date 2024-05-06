@@ -29,6 +29,7 @@
                             <li><a class="dropdown-item" href="{% url 'mail:client_list' %}">My Clients</a></li>
                             <li><a class="dropdown-item" href="{% url 'mail:mail_list' %}">My Emails</a></li>
                             <li><a class="dropdown-item" href="{% url 'mail:settings_list' %}">My Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mail:logs_list' %}">My Logs</a></li>
                             <li>
                                 <form method="post" action="{% url 'users:logout' %}">
                                     {% csrf_token %}

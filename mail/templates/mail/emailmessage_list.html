@@ -8,14 +8,16 @@
             <div class="card-body">
                 <table class="table table-striped">
                     <tr>
-                        <th class="w-35">Заголовок</th>
-                        <th>Содержание письма</th>
+                        <th width="30%">Заголовок</th>
+                        <th width="58%">Содержание письма</th>
+                        <th width="12%"></th>
                     </tr>
                     {% for object in object_list %}
                     {% if object.owner == request.user or user.is_superuser %}
                     <tr>
                         <td scope="row">{{ object.head }}</td>
                         <td>{{ object.body }}</td>
+                        <td><a href="{% url 'mail:mail_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
                     </tr>
                     {% endif %}
                     {% endfor %}

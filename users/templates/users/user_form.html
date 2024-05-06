@@ -9,6 +9,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-block btn-success mb-3">Сохранить</button>
+                <a href="{% url 'users:delete_user' %}" type="button" class="nav-link">Удалить аккаунт</a>
             </div>
         </div>
     </div>

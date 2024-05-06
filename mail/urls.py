@@ -4,7 +4,8 @@ from django.views.decorators.cache import cache_page
 from mail.apps import MailConfig
 from mail.views import ClientListView, ClientDeleteView, ClientCreateView, ClientUpdateView, ClientDetailView, \
     EmailSettingsListView, EmailSettingsCreateView, EmailSettingsUpdateView, EmailSettingsDeleteView, \
-    EmailMessageListView, EmailMessageCreateView, EmailMessageUpdateView, EmailMessageDeleteView, HomeView
+    EmailMessageListView, EmailMessageCreateView, EmailMessageUpdateView, EmailMessageDeleteView, HomeView, \
+    EmailTryListView
 
 app_name = MailConfig.name
 
@@ -26,4 +27,6 @@ urlpatterns = [
     path('email_message/create/', EmailMessageCreateView.as_view(), name='mail_create'),
     path('email_message/<int:pk>/update/', EmailMessageUpdateView.as_view(), name='mail_update'),
     path('email_message/<int:pk>/delete/', EmailMessageDeleteView.as_view(), name='mail_delete'),
+
+    path('logs/', EmailTryListView.as_view(), name='logs_list'),
 ]

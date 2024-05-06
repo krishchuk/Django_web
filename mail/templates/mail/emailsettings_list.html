@@ -8,18 +8,20 @@
             <div class="card-body">
                 <table class="table">
                     <tr>
-                        <th class="w-30">Периодичность</th>
-                        <th class="w-30">Статус</th>
-                        <th class="w-30">Дата первой отправки</th>
-                        <th class="w-30">Дата следующей отправки</th>
+                        <th width="22%">Периодичность</th>
+                        <th width="22%">Статус</th>
+                        <th width="22%">Дата первой отправки</th>
+                        <th width="22%">Дата следующей отправки</th>
+                        <th width="12%"></th>
                     </tr>
                     {% for object in object_list %}
-                    {% if object.owner == request.user or user.is_superuser %}
+                    {% if object.owner == request.user%}
                     <tr>
-                        <td scope="row">{{ object.periodicity }}</td>
+                        <td>{{ object.periodicity }}</td>
                         <td>{{ object.status }}</td>
                         <td>{{ object.date_start }}</td>
                         <td>{{ object.date_next }}</td>
+                        <td><a href="{% url 'mail:settings_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
                     </tr>
                     {% endif %}
                     {% endfor %}

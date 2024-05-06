@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.models import Blog
 from mail.forms import ClientForms, EmailSettingsForms, EmailMessageForms
-from mail.models import Client, EmailSettings, EmailMessage
+from mail.models import Client, EmailSettings, EmailMessage, EmailTry
 
 
 class HomeView(TemplateView):
@@ -143,4 +143,11 @@ class EmailMessageListView(LoginRequiredMixin, ListView):
     model = EmailMessage
     extra_context = {
         'title': "Список писем"
+    }
+
+
+class EmailTryListView(LoginRequiredMixin, ListView):
+    model = EmailTry
+    extra_context = {
+        'title': "Отчет проведенных рассылок"
     }
