@@ -5,7 +5,8 @@
   "fields": {
     "email": "PetrovPP@test.test",
     "full_name": "Петров Петр Петрович",
-    "comment": null
+    "comment": null,
+    "owner": 2
   }
 },
 {
@@ -14,7 +15,8 @@
   "fields": {
     "email": "Ivanov2000@test.test",
     "full_name": "Иванов Иван",
-    "comment": "Отчества нет"
+    "comment": "Отчества нет",
+    "owner": 2
   }
 },
 {
@@ -23,7 +25,8 @@
   "fields": {
     "email": "terminator3000@test.test",
     "full_name": "Шварцнеггер Арнольд",
-    "comment": "Тот самый"
+    "comment": "Тот самый",
+    "owner": 3
   }
 },
 {
@@ -32,7 +35,8 @@
   "fields": {
     "email": "krasivaya_pochta@test.test",
     "full_name": "Красивое ФИО",
-    "comment": null
+    "comment": null,
+    "owner": 1
   }
 },
 {
@@ -41,7 +45,173 @@
   "fields": {
     "email": "test@test.test",
     "full_name": "Тест Тестов",
-    "comment": "тест"
+    "comment": "тест",
+    "owner": 1
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 6,
+  "fields": {
+    "email": "ms.den.best@mail.ru",
+    "full_name": "Денис",
+    "comment": "Это я",
+    "owner": 3
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 7,
+  "fields": {
+    "email": "ms.den.best@mail.ru",
+    "full_name": "Денис",
+    "comment": "Это я",
+    "owner": 3
+  }
+},
+{
+  "model": "mail.client",
+  "pk": 8,
+  "fields": {
+    "email": "ms.den.best@mail.ru",
+    "full_name": "Денис",
+    "comment": "Это я",
+    "owner": 3
+  }
+},
+{
+  "model": "mail.emailmessage",
+  "pk": 1,
+  "fields": {
+    "head": "Тест",
+    "body": "Тест письма №1",
+    "owner": 1
+  }
+},
+{
+  "model": "mail.emailmessage",
+  "pk": 2,
+  "fields": {
+    "head": "Тест 2",
+    "body": "Тест письма №2",
+    "owner": 2
+  }
+},
+{
+  "model": "mail.emailmessage",
+  "pk": 3,
+  "fields": {
+    "head": "Тест 3",
+    "body": "Тестовое письмо №3",
+    "owner": 1
+  }
+},
+{
+  "model": "mail.emailmessage",
+  "pk": 4,
+  "fields": {
+    "head": "Мое письмо",
+    "body": "Тут текст моего письма",
+    "owner": 2
+  }
+},
+{
+  "model": "mail.emailmessage",
+  "pk": 5,
+  "fields": {
+    "head": "Письмо самому себе",
+    "body": "Как дела?",
+    "owner": 3
+  }
+},
+{
+  "model": "mail.emailsettings",
+  "pk": 18,
+  "fields": {
+    "date_start": "2024-05-06T16:50:30.115Z",
+    "date_next": "2024-05-06T16:50:30.115Z",
+    "date_end": "2024-05-06T16:50:30.115Z",
+    "start_time": "16:50:30.115",
+    "periodicity": "PD",
+    "status": "CLOSE",
+    "owner": 3,
+    "message": 5,
+    "is_active": true,
+    "clients": [
+      8,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "mail.emailsettings",
+  "pk": 19,
+  "fields": {
+    "date_start": "2024-05-06T16:57:31.569Z",
+    "date_next": "2024-05-06T16:57:31.569Z",
+    "date_end": "2024-05-06T17:57:06Z",
+    "start_time": "16:57:31.569",
+    "periodicity": "PD",
+    "status": "CLOSE",
+    "owner": 3,
+    "message": 5,
+    "is_active": true,
+    "clients": [
+      8,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "mail.emailsettings",
+  "pk": 20,
+  "fields": {
+    "date_start": "2024-05-06T17:06:00.226Z",
+    "date_next": "2024-05-06T17:06:00.226Z",
+    "date_end": "2024-05-06T18:05:30Z",
+    "start_time": "17:06:00.226",
+    "periodicity": "PD",
+    "status": "CLOSE",
+    "owner": 3,
+    "message": 5,
+    "is_active": true,
+    "clients": [
+      8,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "mail.emailtry",
+  "pk": 4,
+  "fields": {
+    "last_try_datetime": "2024-05-06T16:53:40.963Z",
+    "try_status": true,
+    "server_answer": null,
+    "mailing": 18
+  }
+},
+{
+  "model": "mail.emailtry",
+  "pk": 5,
+  "fields": {
+    "last_try_datetime": "2024-05-06T16:57:41.545Z",
+    "try_status": true,
+    "server_answer": null,
+    "mailing": 19
+  }
+},
+{
+  "model": "mail.emailtry",
+  "pk": 6,
+  "fields": {
+    "last_try_datetime": "2024-05-06T17:06:10.911Z",
+    "try_status": true,
+    "server_answer": null,
+    "mailing": 20
   }
 }
 ]

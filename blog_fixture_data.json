@@ -1,0 +1,50 @@
+[
+{
+  "model": "blog.blog",
+  "pk": 1,
+  "fields": {
+    "title": "Мы работаем!",
+    "slug": null,
+    "content": "Друзья, наш сервис рассылок Mail запущен!",
+    "picture": "blog/start.jpg",
+    "created_at": "2024-05-04",
+    "views_count": 7
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 2,
+  "fields": {
+    "title": "Зарегистрируйся!",
+    "slug": null,
+    "content": "Зарегистрируйся на Mail и получи доступ ко всем возможностям портала",
+    "picture": "blog/access-server.png",
+    "created_at": "2024-05-04",
+    "views_count": 1
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 3,
+  "fields": {
+    "title": "Модернизация",
+    "slug": null,
+    "content": "Сервис Mail переехал на новые сервера! Теперь отправка рассылок происходит быстрее",
+    "picture": "blog/new_servers.jpg",
+    "created_at": "2024-05-04",
+    "views_count": 0
+  }
+},
+{
+  "model": "blog.blog",
+  "pk": 4,
+  "fields": {
+    "title": "Как это работает?",
+    "slug": null,
+    "content": "Настройте периодичность рассылки и выберите список клиентов, остальное Mail сделает за Вас!",
+    "picture": "blog/how_it_works.jpg",
+    "created_at": "2024-05-04",
+    "views_count": 0
+  }
+}
+]
