@@ -12,10 +12,12 @@
                         <th>Содержание письма</th>
                     </tr>
                     {% for object in object_list %}
+                    {% if object.owner == request.user or user.is_superuser %}
                     <tr>
                         <td scope="row">{{ object.head }}</td>
                         <td>{{ object.body }}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </table>
             </div>

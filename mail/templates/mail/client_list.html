@@ -14,12 +14,14 @@
                         <th></th>
                     </tr>
                     {% for object in object_list %}
+                    {% if object.owner == request.user or user.is_superuser %}
                     <tr>
                         <td scope="row">{{ object.email }}</td>
                         <td>{{ object.full_name }}</td>
                         <td>{% if object.comment %} {{ object.comment }} {% endif %}</td>
                         <td><a href="{% url 'mail:client_detail' object.pk %}" type="button" class="nav-link">Подробнее</a></td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </table>
             </div>

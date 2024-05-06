@@ -46,6 +46,10 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         'title': "Добавить клиента"
     }
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     model = Client
@@ -67,16 +71,20 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
 class EmailSettingsCreateView(LoginRequiredMixin, CreateView):
     model = EmailSettings
     form_class = EmailSettingsForms
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:settings_list')
     extra_context = {
         'title': "Добавить настройку рассылки"
     }
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class EmailSettingsUpdateView(LoginRequiredMixin, UpdateView):
     model = EmailSettings
     form_class = EmailSettingsForms
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:settings_list')
     extra_context = {
         'title': "Настроить рассылку"
     }
@@ -84,7 +92,7 @@ class EmailSettingsUpdateView(LoginRequiredMixin, UpdateView):
 
 class EmailSettingsDeleteView(LoginRequiredMixin, DeleteView):
     model = EmailSettings
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:settings_list')
     extra_context = {
         'title': "Удалить настройку рассылки"
     }
@@ -100,16 +108,20 @@ class EmailSettingsListView(LoginRequiredMixin, ListView):
 class EmailMessageCreateView(LoginRequiredMixin, CreateView):
     model = EmailMessage
     form_class = EmailMessageForms
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:mail_list')
     extra_context = {
         'title': "Создать письмо"
     }
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class EmailMessageUpdateView(LoginRequiredMixin, UpdateView):
     model = EmailMessage
     form_class = EmailMessageForms
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:mail_list')
     extra_context = {
         'title': "Изменить письмо"
     }
@@ -117,7 +129,7 @@ class EmailMessageUpdateView(LoginRequiredMixin, UpdateView):
 
 class EmailMessageDeleteView(LoginRequiredMixin, DeleteView):
     model = EmailMessage
-    success_url = reverse_lazy('mail:home')
+    success_url = reverse_lazy('mail:mail_list')
     extra_context = {
         'title': "Удалить письмо"
     }

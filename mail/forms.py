@@ -23,7 +23,7 @@ class ClientForms(StyleFormMixin, forms.ModelForm):
 class EmailSettingsForms(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = EmailSettings
-        fields = ('periodicity', 'status',)
+        fields = ('periodicity', 'message', 'clients', 'date_end')
 
 
 class EmailMessageForms(StyleFormMixin, forms.ModelForm):

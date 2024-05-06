@@ -10,14 +10,18 @@
                     <tr>
                         <th class="w-30">Периодичность</th>
                         <th class="w-30">Статус</th>
-                        <th class="w-30">Дата и время первой отправки</th>
+                        <th class="w-30">Дата первой отправки</th>
+                        <th class="w-30">Дата следующей отправки</th>
                     </tr>
                     {% for object in object_list %}
+                    {% if object.owner == request.user or user.is_superuser %}
                     <tr>
                         <td scope="row">{{ object.periodicity }}</td>
                         <td>{{ object.status }}</td>
-                        <td>{{ object.first_datetime }}</td>
+                        <td>{{ object.date_start }}</td>
+                        <td>{{ object.date_next }}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </table>
             </div>

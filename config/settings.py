@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_apscheduler',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 USE_I18N = True
 
@@ -152,6 +153,17 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', False) == 'True'
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', False) == 'True'
 
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
+
+# Максимальное время выполнения, разрешенное для заданий, которые запускаются вручную через сайт администрирования
+# Django, что
+# предотвращает истечение времени ожидания HTTP-запросов сайта администрирования.
+#
+# Более длительные задания, вероятно, следует передать в библиотеку обработки фоновых задач,
+# которая вместо этого поддерживает несколько фоновых рабочих процессов (например, Dramatiq, Celery, Django-RQ,
+# и т. д. См.: https://djangopackages.org/grids/g /workers-queues-tasks/ для популярных вариантов).
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # секунд
+
 CACHE_ENABLED = False
 if CACHE_ENABLED:
     CACHES = {
@@ -160,3 +172,4 @@ if CACHE_ENABLED:
             'LOCATION': os.getenv('LOCATION'),
         }
     }
+
