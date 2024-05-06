@@ -63,7 +63,7 @@ class ConfirmRegisterView(TemplateView):
             user.is_active = True
             user.save()
             return redirect('users:login')
-        return redirect('catalog:home')
+        return redirect('mail:home')
 
 
 class CustomLoginView(LoginView):

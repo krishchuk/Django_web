@@ -1,7 +1,9 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from blog.models import Blog
 from mail.forms import ClientForms, EmailSettingsForms, EmailMessageForms
 from mail.models import Client, EmailSettings, EmailMessage
 
@@ -9,8 +11,21 @@ from mail.models import Client, EmailSettings, EmailMessage
 class HomeView(TemplateView):
     template_name = 'mail/home.html'
     extra_context = {
-            'title': "Mail - Сервис Ваших рассылок"
+            'title': 'Mail - Сервис Ваших рассылок'
         }
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data()
+        items = EmailSettings.objects.all()
+        clients = Client.objects.all()
+        blog_list = Blog.objects.order_by('?')[:3]
+
+        context_data['all_mailings_count'] = items.count()
+        context_data['active_mailings_count'] = items.filter(is_active=True).count()
+        context_data['unique_clients_count'] = clients.values('email').distinct().count()
+        context_data['blog_list'] = blog_list
+
+        return context_data
 
 
 class ClientListView(LoginRequiredMixin, ListView):
