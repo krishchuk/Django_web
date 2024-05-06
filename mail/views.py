@@ -41,17 +41,6 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
         'title': "Описание клиента"
     }
 
-    # def get_context_data(self, **kwargs):
-    #     context_data = super().get_context_data(**kwargs)
-    #     context_data['client'] = self.object
-    #     return context_data
-
-
-# def client_detail(request, pk):
-#     """Отображение деталей клиента."""
-#     client = Client.objects.get(pk=pk)
-#     return render(request, 'spam_mail/client_detail.html', {'client': client})
-
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client

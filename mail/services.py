@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 
+from blog.models import Blog
 from mail.models import EmailSettings, EmailTry
 
 
@@ -59,16 +60,16 @@ def my_job():
         mail.save()
 
 
-def get_cache_for_mailings():
-    if settings.CACHE_ENABLED:
-        key = 'mailings_count'
-        mailings_count = cache.get(key)
-        if mailings_count is None:
-            mailings_count = EmailSettings.objects.all().count()
-            cache.set(key, mailings_count)
-    else:
-        mailings_count = EmailSettings.objects.all().count()
-    return mailings_count
+def get_blog_from_cache():
+    if not settings.CACHE_ENABLED:
+        return Blog.objects.all()
+    key = "blog_list"
+    blog = cache.get(key)
+    if blog is not None:
+        return blog
+    blog = Blog.objects.all()
+    cache.set(key, blog)
+    return blog
 
 
 def send_mailing():

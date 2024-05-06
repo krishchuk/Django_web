@@ -164,7 +164,7 @@ APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
 # и т. д. См.: https://djangopackages.org/grids/g /workers-queues-tasks/ для популярных вариантов).
 APSCHEDULER_RUN_NOW_TIMEOUT = 25  # секунд
 
-CACHE_ENABLED = False
+CACHE_ENABLED = True
 if CACHE_ENABLED:
     CACHES = {
         'default': {

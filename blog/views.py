@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from blog.models import Blog
+from mail.services import get_blog_from_cache
 
 
 class BlogListView(ListView):
@@ -10,6 +11,9 @@ class BlogListView(ListView):
     extra_context = {
         'title': "Новости"
     }
+
+    def get_queryset(self):
+        return get_blog_from_cache()
 
 
 class BlogDetailView(LoginRequiredMixin, DetailView):
