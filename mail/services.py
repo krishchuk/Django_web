@@ -20,21 +20,24 @@ def my_job():
 
     mails = EmailSettings.objects.all().filter(status='CREATED') \
         .filter(is_active=True) \
-        .filter(date_next__lte=timezone.now()) \
-        .filter(date_end__gte=timezone.now())
+        .filter(date_next__lte=timezone.now())
 
     for mail in mails:
         mail.status = 'RUN'
         mail.save()
         emails_list = [client.email for client in mail.clients.all()]
 
-        result = send_mail(
-            subject=mail.message.head,
-            message=mail.message.body,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=emails_list,
-            fail_silently=False,
-        )
+        # if (timezone.now() <= mail.date_next < (timezone.now() + timedelta(minutes=1)) or
+        #         mail.date_start < (timezone.now() + timedelta(minutes=1))):
+        result = 10
+        for client in emails_list:
+            result = send_mail(
+                subject=mail.message.head,
+                message=mail.message.body,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[client],
+                fail_silently=False,
+            )
 
         if result == 1:
             status = True
@@ -45,15 +48,15 @@ def my_job():
         log.save()
 
         if mail.periodicity == 'PD':
-            mail.next_date = log.last_try_datetime + day
+            mail.date_next = log.last_try_datetime + day
         elif mail.periodicity == 'PW':
-            mail.next_date = log.last_try_datetime + weak
+            mail.date_next = log.last_try_datetime + weak
         elif mail.periodicity == 'PM':
-            mail.next_date = log.last_try_datetime + month
+            mail.date_next = log.last_try_datetime + month
         elif mail.periodicity == 'PY':
-            mail.next_date = log.last_try_datetime + year
+            mail.date_next = log.last_try_datetime + year
 
-        if mail.next_date < mail.date_end:
+        if mail.date_next < mail.date_end:
             mail.status = 'CREATED'
         else:
             mail.status = 'CLOSE'

@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
@@ -82,6 +84,17 @@ class EmailSettingsCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        # mail = form.cleaned_data['periodicity']
+        form.instance.date_next = form.instance.date_start
+        # if mail == 'PD':
+        #     form.instance.date_next = form.instance.date_start + timedelta(days=1, hours=0, minutes=0)
+        # elif mail.periodicity == 'PW':
+        #     form.instance.date_next = form.instance.date_start + timedelta(days=7, hours=0, minutes=0)
+        # elif mail.periodicity == 'PM':
+        #     form.instance.date_next = form.instance.date_start + timedelta(days=30, hours=0, minutes=0)
+        # elif mail.periodicity == 'PY':
+        #     form.instance.date_next = form.instance.date_start + timedelta(days=365, hours=0, minutes=0)
+
         return super().form_valid(form)
 
 

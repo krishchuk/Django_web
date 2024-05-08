@@ -11,7 +11,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(EmailSettings)
 class EmailSettingsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_start', 'periodicity', 'status', 'owner', 'is_active')
+    list_display = ('id', 'date_start', 'date_end', 'periodicity', 'status', 'owner', 'is_active')
     search_fields = ('date_start', 'status')
     list_filter = ('periodicity', 'status')
 

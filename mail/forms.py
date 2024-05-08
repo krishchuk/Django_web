@@ -29,7 +29,7 @@ class EmailSettingsForms(StyleFormMixin, forms.ModelForm):
 
     class Meta:
         model = EmailSettings
-        fields = ('periodicity', 'message', 'clients', 'date_end')
+        fields = ('periodicity', 'message', 'clients', 'date_start', 'date_end')
 
 
 class EmailMessageForms(StyleFormMixin, forms.ModelForm):
