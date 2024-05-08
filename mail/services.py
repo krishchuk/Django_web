@@ -9,7 +9,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from blog.models import Blog
-from mail.models import EmailSettings, EmailTry
+from mail.models import EmailSettings, EmailTry, Client
 
 
 def my_job():
@@ -20,8 +20,8 @@ def my_job():
 
     mails = EmailSettings.objects.all().filter(status='CREATED') \
         .filter(is_active=True) \
-        .filter(date_nextlte=timezone.now()) \
-        .filter(date_endgte=timezone.now())
+        .filter(date_next__lte=timezone.now()) \
+        .filter(date_end__gte=timezone.now())
 
     for mail in mails:
         mail.status = 'RUN'
@@ -70,6 +70,42 @@ def get_blog_from_cache():
     blog = Blog.objects.all()
     cache.set(key, blog)
     return blog
+
+
+def get_clients_count_from_cache():
+    if not settings.CACHE_ENABLED:
+        return Client.objects.all().values('email').distinct().count()
+    key = "unique_clients_count"
+    unique_clients_count = cache.get(key)
+    if unique_clients_count is not None:
+        return unique_clients_count
+    unique_clients_count = Client.objects.all().values('email').distinct().count()
+    cache.set(key, unique_clients_count)
+    return unique_clients_count
+
+
+def get_all_mailings_count_from_cache():
+    if not settings.CACHE_ENABLED:
+        return EmailSettings.objects.all().count()
+    key = "active_mailings_count"
+    all_mailings_count = cache.get(key)
+    if all_mailings_count is not None:
+        return all_mailings_count
+    all_mailings_count = EmailSettings.objects.all().count()
+    cache.set(key, all_mailings_count)
+    return all_mailings_count
+
+
+def get_active_mailings_count_from_cache():
+    if not settings.CACHE_ENABLED:
+        return EmailSettings.objects.all().filter(is_active=True).count()
+    key = "active_mailings_count"
+    active_mailings_count = cache.get(key)
+    if active_mailings_count is not None:
+        return active_mailings_count
+    active_mailings_count = EmailSettings.objects.all().filter(is_active=True).count()
+    cache.set(key, active_mailings_count)
+    return active_mailings_count
 
 
 def send_mailing():

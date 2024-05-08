@@ -3,30 +3,32 @@
 <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
+        {% if 'manager' not in groups and not user.is_superuser %}
         <a class="p-2 nav-link active" href="{% url 'mail:settings_create' %}">Добавить настройку</a>
-        <div class="card box-shadow">
-            <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th width="22%">Периодичность</th>
-                        <th width="22%">Статус</th>
-                        <th width="22%">Дата первой отправки</th>
-                        <th width="22%">Дата следующей отправки</th>
-                        <th width="12%"></th>
-                    </tr>
-                    {% for object in object_list %}
-                    {% if object.owner == request.user%}
-                    <tr>
-                        <td>{{ object.periodicity }}</td>
-                        <td>{{ object.status }}</td>
-                        <td>{{ object.date_start }}</td>
-                        <td>{{ object.date_next }}</td>
-                        <td><a href="{% url 'mail:settings_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
-                    </tr>
+        {% endif %}
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th width="22%">Периодичность</th>
+                    <th width="22%">Статус</th>
+                    <th width="22%">Дата первой отправки</th>
+                    <th width="22%">Дата следующей отправки</th>
+                    <th width="12%"></th>
+                </tr>
+                {% for object in object_list %}
+                {% if object.owner_id == request.user.id or user.is_superuser or 'manager' in groups %}
+                <tr>
+                    <td>{{ object.periodicity }}</td>
+                    <td>{{ object.status }}</td>
+                    <td>{{ object.date_start }}</td>
+                    <td>{{ object.date_next }}</td>
+                    {% if 'manager' not in groups and not user.is_superuser %}
+                    <td><a href="{% url 'mail:settings_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
                     {% endif %}
-                    {% endfor %}
-                </table>
-            </div>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>

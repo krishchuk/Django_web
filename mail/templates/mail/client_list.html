@@ -14,7 +14,7 @@
                         <th></th>
                     </tr>
                     {% for object in object_list %}
-                    {% if object.owner == request.user or user.is_superuser %}
+                    {% if object.owner == request.user or user.is_superuser or 'manager' in groups %}
                     <tr>
                         <td scope="row">{{ object.email }}</td>
                         <td>{{ object.full_name }}</td>

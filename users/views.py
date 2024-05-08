@@ -2,12 +2,14 @@ import string
 import random
 
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.views import LoginView
 from django.conf import settings
 from django.core.mail import send_mail
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, TemplateView, FormView, DeleteView
+from django.views.generic import CreateView, UpdateView, TemplateView, FormView, DeleteView, ListView
 
 from users.forms import UserRegisterForm, ProfileChangeForm, CustomAuthenticationForm
 from users.models import User
@@ -134,3 +136,17 @@ class UserDeleteView(DeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class ManagerRequiredMixin(AccessMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.has_perm('users.disable_user'):
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+
+class UsersListView(ManagerRequiredMixin, ListView):
+    model = User
+    extra_context = {
+        'title': 'Список пользователей',
+    }

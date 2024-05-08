@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.models import Blog
 from mail.forms import ClientForms, EmailSettingsForms, EmailMessageForms
 from mail.models import Client, EmailSettings, EmailMessage, EmailTry
+from mail.services import get_all_mailings_count_from_cache, get_active_mailings_count_from_cache, \
+    get_clients_count_from_cache
 
 
 class HomeView(TemplateView):
@@ -16,13 +18,11 @@ class HomeView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data()
-        items = EmailSettings.objects.all()
-        clients = Client.objects.all()
         blog_list = Blog.objects.order_by('?')[:3]
 
-        context_data['all_mailings_count'] = items.count()
-        context_data['active_mailings_count'] = items.filter(is_active=True).count()
-        context_data['unique_clients_count'] = clients.values('email').distinct().count()
+        context_data['all_mailings_count'] = get_all_mailings_count_from_cache()
+        context_data['active_mailings_count'] = get_active_mailings_count_from_cache()
+        context_data['unique_clients_count'] = get_clients_count_from_cache()
         context_data['blog_list'] = blog_list
 
         return context_data
@@ -111,7 +111,7 @@ class EmailSettingsListView(LoginRequiredMixin, ListView):
 
 class EmailMessageCreateView(LoginRequiredMixin, CreateView):
     model = EmailMessage
-    form_class = EmailMessageForms
+    form_class = EmailMessageForms()
     success_url = reverse_lazy('mail:mail_list')
     extra_context = {
         'title': "Создать письмо"

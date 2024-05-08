@@ -21,15 +21,31 @@
                     <a class="nav-link disabled" aria-disabled="true">News</a>
                 </li>
                 {% endif %}
+                {% if user.is_authenticated and 'manager' in groups %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:user_list' %}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'mail:client_list' %}">Clients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'mail:settings_list' %}">Mailings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'mail:mail_list' %}">Emails</a>
+                </li>
+                {% endif %}
                 <li class="nav-item dropdown">
                     <a class="nav-link active dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
                     <ul class="dropdown-menu">
                         {% if user.is_authenticated %}
                             <li><a class="dropdown-item" href="{% url 'users:profile' %}">My Profile</a></li>
+                            {% if 'manager' not in groups %}
                             <li><a class="dropdown-item" href="{% url 'mail:client_list' %}">My Clients</a></li>
                             <li><a class="dropdown-item" href="{% url 'mail:mail_list' %}">My Emails</a></li>
                             <li><a class="dropdown-item" href="{% url 'mail:settings_list' %}">My Settings</a></li>
                             <li><a class="dropdown-item" href="{% url 'mail:logs_list' %}">My Logs</a></li>
+                            {% endif %}
                             <li>
                                 <form method="post" action="{% url 'users:logout' %}">
                                     {% csrf_token %}

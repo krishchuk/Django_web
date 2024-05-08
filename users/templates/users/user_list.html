@@ -1,0 +1,38 @@
+{% extends 'mail/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th width="30%">Почта</th>
+                    <th width="30%">Имя</th>
+                    <th width="30%">Фамилия</th>
+                    <th></th>
+                </tr>
+                {% for user in user_list %}
+
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>
+
+                        <form method="post">
+                            {% if user.is_active == True %}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Заблокировать</button>
+                            {% else %}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-success">Активировать</button>
+                            {% endif %}
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

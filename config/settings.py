@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'mail.context_processors.groups_processor',
             ],
         },
     },
@@ -170,6 +171,7 @@ if CACHE_ENABLED:
         'default': {
             'BACKEND': 'django.core.cache.backends.redis.RedisCache',
             'LOCATION': os.getenv('LOCATION'),
+            "TIMEOUT": 20,
         }
     }
 

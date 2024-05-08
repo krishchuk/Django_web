@@ -2,6 +2,7 @@ from django import forms
 from django.forms import BooleanField
 
 from mail.models import Client, EmailSettings, EmailMessage
+from users.models import User
 
 
 class StyleFormMixin:
@@ -21,6 +22,11 @@ class ClientForms(StyleFormMixin, forms.ModelForm):
 
 
 class EmailSettingsForms(StyleFormMixin, forms.ModelForm):
+    # def __init__(self, owner=None, *args, **kwargs):
+    #     super(EmailSettingsForms, self).__init__(*args, **kwargs)
+    #     self.fields['clients'].queryset = Client.objects.filter(owner=owner)
+    #     self.fields['message'].queryset = EmailMessage.objects.filter(owner=owner)
+
     class Meta:
         model = EmailSettings
         fields = ('periodicity', 'message', 'clients', 'date_end')

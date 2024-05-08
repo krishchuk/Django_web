@@ -3,26 +3,30 @@
 <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
+        {% if 'manager' not in groups and not user.is_superuser %}
         <a class="p-2 nav-link active" href="{% url 'mail:mail_create' %}">Создать письмо</a>
-        <div class="card  box-shadow">
-            <div class="card-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th width="30%">Заголовок</th>
-                        <th width="58%">Содержание письма</th>
-                        <th width="12%"></th>
-                    </tr>
-                    {% for object in object_list %}
-                    {% if object.owner == request.user or user.is_superuser %}
-                    <tr>
-                        <td scope="row">{{ object.head }}</td>
-                        <td>{{ object.body }}</td>
-                        <td><a href="{% url 'mail:mail_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
-                    </tr>
+        {% endif %}
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <th width="30%">Заголовок</th>
+                    <th width="60%">Содержание письма</th>
+                    <th width="10%"></th>
+                </tr>
+                {% for object in object_list %}
+                {% if object.owner == request.user or user.is_superuser or 'manager' in groups %}
+                <tr>
+                    <td scope="row">{{ object.head }}</td>
+                    <td>{{ object.body }}</td>
+                    {% if 'manager' not in groups and not user.is_superuser %}
+                    <td><a href="{% url 'mail:mail_delete' object.pk %}" type="button" class="nav-link">Удалить</a></td>
+                    {% else %}
+                    <td></td>
                     {% endif %}
-                    {% endfor %}
-                </table>
-            </div>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>
