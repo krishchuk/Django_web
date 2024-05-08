@@ -19,6 +19,6 @@
  - Примените миграции базы данных: python manage.py migrate
  - Создайте суперпользователя: python manage.py csu
  - Запустите Redis сервер: redis-server
- - Запустите планировщик задач: python manage.py runapscheduler.py
  - Запустите локальный сервер: python manage.py runserver
+ - Запустите планировщик задач: python manage.py runapscheduler.py
  - Откройте браузер и перейдите по адресу http://127.0.0.1:8000/ для доступа к приложению.
